@@ -42,25 +42,21 @@
 
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2"/>
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
-
-<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
 
 
 
@@ -73,8 +69,10 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.7.0',
+    version: '7.1.2',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: false,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -104,7 +102,7 @@
 <meta property="og:site_name" content="啊哈">
 <meta property="og:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-19T12:14:34.980Z">
+<meta property="og:updated_time" content="2019-06-21T12:00:29.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="异常处理的设计与重构">
 <meta name="twitter:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
@@ -113,7 +111,8 @@
 
 
 
-
+  
+  
   <link rel="canonical" href="https://zhenyuanlau.github.io/2019/01/19/exception-processing/"/>
 
 
@@ -370,18 +369,14 @@
                 
               
 
-              <time title="创建时间：2019-01-19 17:40:42 / 修改时间：20:14:34" itemprop="dateCreated datePublished" datetime="2019-01-19T17:40:42+08:00">2019-01-19</time>
+              <time title="创建时间：2019-01-19 17:40:42" itemprop="dateCreated datePublished" datetime="2019-01-19T17:40:42+08:00">2019-01-19</time>
             
 
-            
-              
-
-              
             
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -401,6 +396,7 @@
           
 
           
+            
             
           
 
@@ -520,6 +516,9 @@
 
     <footer class="post-footer">
       
+        
+          
+        
         <div class="post-tags">
           
             <a href="/tags/Exception/" rel="tag"># Exception</a>
@@ -582,7 +581,6 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
@@ -603,7 +601,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">刘振源</p>
-              <p class="site-description motion-element" itemprop="description">个人网站</p>
+              <div class="site-description motion-element" itemprop="description">个人网站</div>
           </div>
 
           
@@ -623,7 +621,11 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
                     
                     
                       
@@ -648,7 +650,11 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
                     
                     
                       
@@ -679,6 +685,8 @@
                 </div>
               
             </nav>
+          
+
           
 
           
@@ -747,6 +755,7 @@
 
     </div>
   </aside>
+  
 
 
         
@@ -775,7 +784,7 @@
 
 
 
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.2</div>
 
 
 
@@ -841,7 +850,7 @@
 
 
   
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
 
   
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
@@ -853,32 +862,9 @@
   
 
 
-  <script src="/js/src/utils.js?v=6.7.0"></script>
+  <script src="/js/utils.js?v=7.1.2"></script>
 
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
-
-
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="/js/motion.js?v=7.1.2"></script>
 
 
 
@@ -886,7 +872,34 @@
   
 
 
+  <script src="/js/affix.js?v=7.1.2"></script>
 
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
 
 
   
@@ -894,6 +907,7 @@
 
 
 
+  
 
   
 
