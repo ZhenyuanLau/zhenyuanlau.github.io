@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
-<meta name="keywords" content="Exception">
+  <meta name="description" content="安装 Consul1brew install consul 启动 Consul1brew services start consul 重启 Consul1brew services restart consul 重启 Consul 后，数据丢失！ Why? 修改 Consul 启动模式。 1234567891011121314151617181920212223242526272829303132">
+<meta name="keywords" content="macOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="异常处理的设计与重构">
-<meta property="og:url" content="https://zhenyuanlau.github.io/2019/01/19/exception-processing/index.html">
+<meta property="og:title" content="macOS 本地安装 Consul">
+<meta property="og:url" content="https://zhenyuanlau.github.io/2019/07/12/macos-consul/index.html">
 <meta property="og:site_name" content="啊哈">
-<meta property="og:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
+<meta property="og:description" content="安装 Consul1brew install consul 启动 Consul1brew services start consul 重启 Consul1brew services restart consul 重启 Consul 后，数据丢失！ Why? 修改 Consul 启动模式。 1234567891011121314151617181920212223242526272829303132">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-21T12:00:29.731Z">
+<meta property="og:updated_time" content="2019-07-12T13:59:44.477Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="异常处理的设计与重构">
-<meta name="twitter:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
+<meta name="twitter:title" content="macOS 本地安装 Consul">
+<meta name="twitter:description" content="安装 Consul1brew install consul 启动 Consul1brew services start consul 重启 Consul1brew services restart consul 重启 Consul 后，数据丢失！ Why? 修改 Consul 启动模式。 1234567891011121314151617181920212223242526272829303132">
 
 
 
@@ -113,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://zhenyuanlau.github.io/2019/01/19/exception-processing/"/>
+  <link rel="canonical" href="https://zhenyuanlau.github.io/2019/07/12/macos-consul/"/>
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>异常处理的设计与重构 | 啊哈</title>
+  <title>macOS 本地安装 Consul | 啊哈</title>
   
 
 
@@ -326,7 +326,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhenyuanlau.github.io/2019/01/19/exception-processing/"/>
+    <link itemprop="mainEntityOfPage" href="https://zhenyuanlau.github.io/2019/07/12/macos-consul/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘振源"/>
@@ -343,7 +343,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">异常处理的设计与重构
+          <h1 class="post-title" itemprop="name headline">macOS 本地安装 Consul
 
               
             
@@ -369,7 +369,7 @@
                 
               
 
-              <time title="创建时间：2019-01-19 17:40:42" itemprop="dateCreated datePublished" datetime="2019-01-19T17:40:42+08:00">2019-01-19</time>
+              <time title="创建时间：2019-07-12 21:40:11" itemprop="dateCreated datePublished" datetime="2019-07-12T21:40:11+08:00">2019-07-12</time>
             
 
             
@@ -387,7 +387,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a></span>
 
                 
                 
@@ -422,79 +422,16 @@
       
 
       
-        <p>《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。</p>
-<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。</p>
-<p>关于异常处理，我们要了解以下定义：</p>
-<ul>
-<li>缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷</li>
-<li>错误（error）</li>
-<li>失败/失效（failure）</li>
-<li>异常/例外（exception）：在程序设计语言中错误与失败的统称</li>
-</ul>
-<p>缺陷是错误的起因，可能会导致失败。</p>
-<h1 id="异常上下文"><a href="#异常上下文" class="headerlink" title="异常上下文"></a>异常上下文</h1><p>异常上下文是当异常发生的时候，异常处理程序可以从异常对象所获得的相关信息。</p>
-<p>设计语义清楚、层级分明的异常类。</p>
-<h1 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h1><ol>
-<li>表达：如何表达异常？符号/异常实例/其他对象</li>
-<li>声明：往外传递的异常是否需要声明？预期异常/非预期异常</li>
-<li>通知：如何产生一个异常的实例？同步异常/异步异常|内部异常/外部异常</li>
-<li>传递：如何传递异常？显式/隐式</li>
-<li>附加：异常处理程序可绑定到何种程序区块？代码块/函数/对象/类</li>
-<li>处理：针对异常，如何找到可以处理它的异常处理程序？静态范围/动态范围</li>
-<li>继续：异常发生之后，程序的控制流程该如何进行？终止/恢复/重试</li>
-<li>清理：无论是否发生异常，如何让程序清理资源以保持在正确的状态？</li>
-<li>可靠性检查：因为异常处理机制所造成的问题，程序语言提供何种检查？静态检查/动态检查</li>
-<li>并发性：程序语言对于并行处理程序，提供多少异常处理的支持？支持/不支持</li>
-</ol>
-<h1 id="异常安全性"><a href="#异常安全性" class="headerlink" title="异常安全性"></a>异常安全性</h1><ol>
-<li>不保证（可能正确，也可能错误）</li>
-<li>基本保证（无泄漏保证）</li>
-<li>强烈保证（具备认可或复原/全部或没有的语义，要么成功，要么失败）</li>
-<li>不抛保证（失效透明）</li>
-</ol>
-<h1 id="异常处理策略"><a href="#异常处理策略" class="headerlink" title="异常处理策略"></a>异常处理策略</h1><p>当程序执行时发生异常，首要任务就是要找到异常发生的根本原因，其次就是要厘清“谁该负责”处理这个异常。</p>
-<p>确定服务的生产者和消费者，确定服务调用的前置条件和后置条件，确定异常处理责任。</p>
-<p>所有的异常状况都有相应的报告。</p>
-<p>报告语义清楚的异常，以便协助开发团队缩短事后除错时间。</p>
-<p>针对不同的健壮性等级做不同的异常设计：错误报告 -&gt; 状态恢复 -&gt; 行为恢复。</p>
-<p>考虑容错设计。</p>
-<h1 id="缺陷处理方法"><a href="#缺陷处理方法" class="headerlink" title="缺陷处理方法"></a>缺陷处理方法</h1><ol>
-<li>缺陷避免</li>
-<li>缺陷容忍（通过错误检测与系统恢复手段，避免服务失效）</li>
-<li>缺陷移除</li>
-<li>缺陷预测</li>
-</ol>
-<h1 id="命令式异常处理"><a href="#命令式异常处理" class="headerlink" title="命令式异常处理"></a>命令式异常处理</h1><h2 id="Try"><a href="#Try" class="headerlink" title="Try"></a>Try</h2><ol>
-<li>实现需求</li>
-<li>为状态恢复做准备或制作检查点</li>
-</ol>
-<h2 id="Catch"><a href="#Catch" class="headerlink" title="Catch"></a>Catch</h2><ol>
-<li>进行错误处理与缺陷处理</li>
-<li>报告错误状况</li>
-<li>控制重试流程</li>
-</ol>
-<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><ol>
-<li>释放资源</li>
-<li>清除检查点</li>
-</ol>
-<h1 id="异常处理设计"><a href="#异常处理设计" class="headerlink" title="异常处理设计"></a>异常处理设计</h1><ol>
-<li>用途观点（失败/通知）</li>
-<li>设计观点（声明/未声明|预期异常/非预期异常）</li>
-<li>处理观点（可恢复/不可恢复）</li>
-<li>工具支持观点（提示/无提示）</li>
-<li>流程观点</li>
-</ol>
-<p>要借助异常的上下文来确定异常的用途。</p>
-<h1 id="异常处理坏味道"><a href="#异常处理坏味道" class="headerlink" title="异常处理坏味道"></a>异常处理坏味道</h1><ul>
-<li>返回码</li>
-<li>忽略已查异常</li>
-<li>忽略异常</li>
-<li>未保护主程序</li>
-<li>空的异常处理程序</li>
-<li>嵌套 Try 语句</li>
-<li>粗心的资源清理</li>
-</ul>
-<h1 id="异常处理重构"><a href="#异常处理重构" class="headerlink" title="异常处理重构"></a>异常处理重构</h1><p>清除异常处理的坏味道（略</p>
+        <h2 id="安装-Consul"><a href="#安装-Consul" class="headerlink" title="安装 Consul"></a>安装 Consul</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install consul</span><br></pre></td></tr></table></figure>
+<h2 id="启动-Consul"><a href="#启动-Consul" class="headerlink" title="启动 Consul"></a>启动 Consul</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start consul</span><br></pre></td></tr></table></figure>
+<h2 id="重启-Consul"><a href="#重启-Consul" class="headerlink" title="重启 Consul"></a>重启 Consul</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services restart consul</span><br></pre></td></tr></table></figure>
+<p>重启 Consul 后，数据丢失！</p>
+<p>Why? 修改 Consul 启动模式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># code /Users/user/Library/LaunchAgents/homebrew.mxcl.consul.plist 不起作用</span><br><span class="line"># code /usr/local/Cellar/consul/1.4.0/homebrew.mxcl.consul.plist</span><br><span class="line"></span><br><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>KeepAlive<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>SuccessfulExit<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>homebrew.mxcl.consul<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/local/opt/consul/bin/consul<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>agent<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>-server<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>-data-dir<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/local/opt/consul/data<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>-bind<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>127.0.0.1<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>-bootstrap-expect<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>1<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>-ui<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>WorkingDirectory<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/local/var<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>StandardErrorPath<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/local/var/log/consul.log<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>StandardOutPath<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/local/var/log/consul.log<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Property-List-属性列表文件"><a href="#Property-List-属性列表文件" class="headerlink" title="Property List(属性列表文件)"></a>Property List(属性列表文件)</h2><blockquote>
+<p>属性列表（Property List）文件是一种用来存储序列化后的对象的文件。<br>Plist文件通常用于储存用户设置，也可以用于存储捆绑的信息。<br>从Mac OS X 10.5开始，Apple也提供了用于编辑，创建和写入plist文件的接口。</p>
+</blockquote>
+<h2 id="Homebrew-Services"><a href="#Homebrew-Services" class="headerlink" title="Homebrew Services"></a>Homebrew Services</h2><p><a href="https://github.com/Homebrew/homebrew-services/blob/master/cmd/brew-services.rb" target="_blank" rel="noopener">brew-services</a></p>
 
       
     </div>
@@ -521,7 +458,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Exception/" rel="tag"># Exception</a>
+            <a href="/tags/macOS/" rel="tag"># macOS</a>
           
         </div>
       
@@ -534,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/19/netease-music-lyric-crawler/" rel="next" title="网易云音乐歌词爬虫">
-                <i class="fa fa-chevron-left"></i> 网易云音乐歌词爬虫
+              <a href="/2019/07/11/fall-with-ruby-again/" rel="next" title="重拾 Ruby">
+                <i class="fa fa-chevron-left"></i> 重拾 Ruby
               </a>
             
           </div>
@@ -543,10 +480,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/11/fall-with-ruby-again/" rel="prev" title="重拾 Ruby">
-                重拾 Ruby <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -763,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理"><span class="nav-number">1.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常上下文"><span class="nav-number">2.</span> <span class="nav-text">异常上下文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理机制"><span class="nav-number">3.</span> <span class="nav-text">异常处理机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常安全性"><span class="nav-number">4.</span> <span class="nav-text">异常安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理策略"><span class="nav-number">5.</span> <span class="nav-text">异常处理策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺陷处理方法"><span class="nav-number">6.</span> <span class="nav-text">缺陷处理方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命令式异常处理"><span class="nav-number">7.</span> <span class="nav-text">命令式异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Try"><span class="nav-number">7.1.</span> <span class="nav-text">Try</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catch"><span class="nav-number">7.2.</span> <span class="nav-text">Catch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Finally"><span class="nav-number">7.3.</span> <span class="nav-text">Finally</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理设计"><span class="nav-number">8.</span> <span class="nav-text">异常处理设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理坏味道"><span class="nav-number">9.</span> <span class="nav-text">异常处理坏味道</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理重构"><span class="nav-number">10.</span> <span class="nav-text">异常处理重构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Consul"><span class="nav-number">1.</span> <span class="nav-text">安装 Consul</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-Consul"><span class="nav-number">2.</span> <span class="nav-text">启动 Consul</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启-Consul"><span class="nav-number">3.</span> <span class="nav-text">重启 Consul</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Property-List-属性列表文件"><span class="nav-number">4.</span> <span class="nav-text">Property List(属性列表文件)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew-Services"><span class="nav-number">5.</span> <span class="nav-text">Homebrew Services</span></a></li></ol></div>
             
 
           </div>
