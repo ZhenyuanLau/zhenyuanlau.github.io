@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
+  <meta name="description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。">
 <meta name="keywords" content="Exception">
 <meta property="og:type" content="article">
 <meta property="og:title" content="异常处理的设计与重构">
 <meta property="og:url" content="https://zhenyuanlau.github.io/2019/01/19/exception-processing/index.html">
 <meta property="og:site_name" content="啊哈">
-<meta property="og:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
+<meta property="og:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-21T12:00:29.731Z">
+<meta property="og:updated_time" content="2019-07-13T00:24:35.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="异常处理的设计与重构">
-<meta name="twitter:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。 异常处理异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。 关于异常处理，我们要了解以下定义：  缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷 错误（error） 失败/失效（failu">
+<meta name="twitter:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。">
 
 
 
@@ -423,7 +423,8 @@
 
       
         <p>《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。</p>
-<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。</p>
+<a id="more"></a>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。</p>
 <p>关于异常处理，我们要了解以下定义：</p>
 <ul>
 <li>缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷</li>
@@ -432,9 +433,9 @@
 <li>异常/例外（exception）：在程序设计语言中错误与失败的统称</li>
 </ul>
 <p>缺陷是错误的起因，可能会导致失败。</p>
-<h1 id="异常上下文"><a href="#异常上下文" class="headerlink" title="异常上下文"></a>异常上下文</h1><p>异常上下文是当异常发生的时候，异常处理程序可以从异常对象所获得的相关信息。</p>
+<h2 id="异常上下文"><a href="#异常上下文" class="headerlink" title="异常上下文"></a>异常上下文</h2><p>异常上下文是当异常发生的时候，异常处理程序可以从异常对象所获得的相关信息。</p>
 <p>设计语义清楚、层级分明的异常类。</p>
-<h1 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h1><ol>
+<h2 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h2><ol>
 <li>表达：如何表达异常？符号/异常实例/其他对象</li>
 <li>声明：往外传递的异常是否需要声明？预期异常/非预期异常</li>
 <li>通知：如何产生一个异常的实例？同步异常/异步异常|内部异常/外部异常</li>
@@ -446,38 +447,38 @@
 <li>可靠性检查：因为异常处理机制所造成的问题，程序语言提供何种检查？静态检查/动态检查</li>
 <li>并发性：程序语言对于并行处理程序，提供多少异常处理的支持？支持/不支持</li>
 </ol>
-<h1 id="异常安全性"><a href="#异常安全性" class="headerlink" title="异常安全性"></a>异常安全性</h1><ol>
+<h2 id="异常安全性"><a href="#异常安全性" class="headerlink" title="异常安全性"></a>异常安全性</h2><ol>
 <li>不保证（可能正确，也可能错误）</li>
 <li>基本保证（无泄漏保证）</li>
 <li>强烈保证（具备认可或复原/全部或没有的语义，要么成功，要么失败）</li>
 <li>不抛保证（失效透明）</li>
 </ol>
-<h1 id="异常处理策略"><a href="#异常处理策略" class="headerlink" title="异常处理策略"></a>异常处理策略</h1><p>当程序执行时发生异常，首要任务就是要找到异常发生的根本原因，其次就是要厘清“谁该负责”处理这个异常。</p>
+<h2 id="异常处理策略"><a href="#异常处理策略" class="headerlink" title="异常处理策略"></a>异常处理策略</h2><p>当程序执行时发生异常，首要任务就是要找到异常发生的根本原因，其次就是要厘清“谁该负责”处理这个异常。</p>
 <p>确定服务的生产者和消费者，确定服务调用的前置条件和后置条件，确定异常处理责任。</p>
 <p>所有的异常状况都有相应的报告。</p>
 <p>报告语义清楚的异常，以便协助开发团队缩短事后除错时间。</p>
 <p>针对不同的健壮性等级做不同的异常设计：错误报告 -&gt; 状态恢复 -&gt; 行为恢复。</p>
 <p>考虑容错设计。</p>
-<h1 id="缺陷处理方法"><a href="#缺陷处理方法" class="headerlink" title="缺陷处理方法"></a>缺陷处理方法</h1><ol>
+<h2 id="缺陷处理方法"><a href="#缺陷处理方法" class="headerlink" title="缺陷处理方法"></a>缺陷处理方法</h2><ol>
 <li>缺陷避免</li>
 <li>缺陷容忍（通过错误检测与系统恢复手段，避免服务失效）</li>
 <li>缺陷移除</li>
 <li>缺陷预测</li>
 </ol>
-<h1 id="命令式异常处理"><a href="#命令式异常处理" class="headerlink" title="命令式异常处理"></a>命令式异常处理</h1><h2 id="Try"><a href="#Try" class="headerlink" title="Try"></a>Try</h2><ol>
+<h2 id="命令式异常处理"><a href="#命令式异常处理" class="headerlink" title="命令式异常处理"></a>命令式异常处理</h2><h2 id="Try"><a href="#Try" class="headerlink" title="Try"></a>Try</h2><ol>
 <li>实现需求</li>
 <li>为状态恢复做准备或制作检查点</li>
 </ol>
-<h2 id="Catch"><a href="#Catch" class="headerlink" title="Catch"></a>Catch</h2><ol>
+<h3 id="Catch"><a href="#Catch" class="headerlink" title="Catch"></a>Catch</h3><ol>
 <li>进行错误处理与缺陷处理</li>
 <li>报告错误状况</li>
 <li>控制重试流程</li>
 </ol>
-<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><ol>
+<h3 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h3><ol>
 <li>释放资源</li>
 <li>清除检查点</li>
 </ol>
-<h1 id="异常处理设计"><a href="#异常处理设计" class="headerlink" title="异常处理设计"></a>异常处理设计</h1><ol>
+<h2 id="异常处理设计"><a href="#异常处理设计" class="headerlink" title="异常处理设计"></a>异常处理设计</h2><ol>
 <li>用途观点（失败/通知）</li>
 <li>设计观点（声明/未声明|预期异常/非预期异常）</li>
 <li>处理观点（可恢复/不可恢复）</li>
@@ -485,7 +486,7 @@
 <li>流程观点</li>
 </ol>
 <p>要借助异常的上下文来确定异常的用途。</p>
-<h1 id="异常处理坏味道"><a href="#异常处理坏味道" class="headerlink" title="异常处理坏味道"></a>异常处理坏味道</h1><ul>
+<h2 id="异常处理坏味道"><a href="#异常处理坏味道" class="headerlink" title="异常处理坏味道"></a>异常处理坏味道</h2><ul>
 <li>返回码</li>
 <li>忽略已查异常</li>
 <li>忽略异常</li>
@@ -494,7 +495,7 @@
 <li>嵌套 Try 语句</li>
 <li>粗心的资源清理</li>
 </ul>
-<h1 id="异常处理重构"><a href="#异常处理重构" class="headerlink" title="异常处理重构"></a>异常处理重构</h1><p>清除异常处理的坏味道（略</p>
+<h2 id="异常处理重构"><a href="#异常处理重构" class="headerlink" title="异常处理重构"></a>异常处理重构</h2><p>清除异常处理的坏味道（略)</p>
 
       
     </div>
@@ -699,6 +700,8 @@
                     
                       
                     
+                      
+                    
                     <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
@@ -763,7 +766,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理"><span class="nav-number">1.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常上下文"><span class="nav-number">2.</span> <span class="nav-text">异常上下文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理机制"><span class="nav-number">3.</span> <span class="nav-text">异常处理机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常安全性"><span class="nav-number">4.</span> <span class="nav-text">异常安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理策略"><span class="nav-number">5.</span> <span class="nav-text">异常处理策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺陷处理方法"><span class="nav-number">6.</span> <span class="nav-text">缺陷处理方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命令式异常处理"><span class="nav-number">7.</span> <span class="nav-text">命令式异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Try"><span class="nav-number">7.1.</span> <span class="nav-text">Try</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catch"><span class="nav-number">7.2.</span> <span class="nav-text">Catch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Finally"><span class="nav-number">7.3.</span> <span class="nav-text">Finally</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理设计"><span class="nav-number">8.</span> <span class="nav-text">异常处理设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理坏味道"><span class="nav-number">9.</span> <span class="nav-text">异常处理坏味道</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理重构"><span class="nav-number">10.</span> <span class="nav-text">异常处理重构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理"><span class="nav-number">1.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常上下文"><span class="nav-number">2.</span> <span class="nav-text">异常上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理机制"><span class="nav-number">3.</span> <span class="nav-text">异常处理机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常安全性"><span class="nav-number">4.</span> <span class="nav-text">异常安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理策略"><span class="nav-number">5.</span> <span class="nav-text">异常处理策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺陷处理方法"><span class="nav-number">6.</span> <span class="nav-text">缺陷处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令式异常处理"><span class="nav-number">7.</span> <span class="nav-text">命令式异常处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Try"><span class="nav-number">8.</span> <span class="nav-text">Try</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Catch"><span class="nav-number">8.1.</span> <span class="nav-text">Catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finally"><span class="nav-number">8.2.</span> <span class="nav-text">Finally</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理设计"><span class="nav-number">9.</span> <span class="nav-text">异常处理设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理坏味道"><span class="nav-number">10.</span> <span class="nav-text">异常处理坏味道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理重构"><span class="nav-number">11.</span> <span class="nav-text">异常处理重构</span></a></li></ol></div>
             
 
           </div>
