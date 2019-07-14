@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。">
-<meta name="keywords" content="Exception">
+  <meta name="description" content="Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。 例子摘自 Sinatra 官网。 1234require &apos;sinatra&apos;get &apos;/frank-says&apos; do  &apos;Put this in your pipe &amp;amp; smoke it!&apos;end 文档Sinatra 工作原理 原理技术支持架构设计架构实现代码统计12345678910111">
+<meta name="keywords" content="Framework">
 <meta property="og:type" content="article">
-<meta property="og:title" content="异常处理的设计与重构">
-<meta property="og:url" content="https://zhenyuanlau.github.io/2019/01/19/exception-processing/index.html">
+<meta property="og:title" content="Sinatra 原理剖析">
+<meta property="og:url" content="https://zhenyuanlau.github.io/2019/07/13/sinatra-under-a-microscope/index.html">
 <meta property="og:site_name" content="啊哈">
-<meta property="og:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。">
+<meta property="og:description" content="Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。 例子摘自 Sinatra 官网。 1234require &apos;sinatra&apos;get &apos;/frank-says&apos; do  &apos;Put this in your pipe &amp;amp; smoke it!&apos;end 文档Sinatra 工作原理 原理技术支持架构设计架构实现代码统计12345678910111">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-13T00:24:35.914Z">
+<meta property="og:updated_time" content="2019-07-14T07:06:48.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="异常处理的设计与重构">
-<meta name="twitter:description" content="《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。">
+<meta name="twitter:title" content="Sinatra 原理剖析">
+<meta name="twitter:description" content="Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。 例子摘自 Sinatra 官网。 1234require &apos;sinatra&apos;get &apos;/frank-says&apos; do  &apos;Put this in your pipe &amp;amp; smoke it!&apos;end 文档Sinatra 工作原理 原理技术支持架构设计架构实现代码统计12345678910111">
 
 
 
@@ -113,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://zhenyuanlau.github.io/2019/01/19/exception-processing/"/>
+  <link rel="canonical" href="https://zhenyuanlau.github.io/2019/07/13/sinatra-under-a-microscope/"/>
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>异常处理的设计与重构 | 啊哈</title>
+  <title>Sinatra 原理剖析 | 啊哈</title>
   
 
 
@@ -326,7 +326,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhenyuanlau.github.io/2019/01/19/exception-processing/"/>
+    <link itemprop="mainEntityOfPage" href="https://zhenyuanlau.github.io/2019/07/13/sinatra-under-a-microscope/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘振源"/>
@@ -343,7 +343,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">异常处理的设计与重构
+          <h1 class="post-title" itemprop="name headline">Sinatra 原理剖析
 
               
             
@@ -369,7 +369,7 @@
                 
               
 
-              <time title="创建时间：2019-01-19 17:40:42" itemprop="dateCreated datePublished" datetime="2019-01-19T17:40:42+08:00">2019-01-19</time>
+              <time title="创建时间：2019-07-13 08:46:33" itemprop="dateCreated datePublished" datetime="2019-07-13T08:46:33+08:00">2019-07-13</time>
             
 
             
@@ -387,7 +387,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CodeReading/" itemprop="url" rel="index"><span itemprop="name">CodeReading</span></a></span>
 
                 
                 
@@ -422,80 +422,13 @@
       
 
       
-        <p>《异常处理的设计与重构》较为系统地讲述了异常处理，但是叙述多为繁冗，在此提取实用的内容，摘录并整理如下（该书未涉及函数式异常处理）。</p>
-<a id="more"></a>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>异常处理很重要，影响软件的健壮性，影响用户体验，继而影响公司的盈利。</p>
-<p>关于异常处理，我们要了解以下定义：</p>
-<ul>
-<li>缺陷（fault）：瞬时缺陷/间歇缺陷/永久缺陷 | 设计缺陷/组件缺陷 | 开发缺陷/物理缺陷/交互缺陷</li>
-<li>错误（error）</li>
-<li>失败/失效（failure）</li>
-<li>异常/例外（exception）：在程序设计语言中错误与失败的统称</li>
-</ul>
-<p>缺陷是错误的起因，可能会导致失败。</p>
-<h2 id="异常上下文"><a href="#异常上下文" class="headerlink" title="异常上下文"></a>异常上下文</h2><p>异常上下文是当异常发生的时候，异常处理程序可以从异常对象所获得的相关信息。</p>
-<p>设计语义清楚、层级分明的异常类。</p>
-<h2 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h2><ol>
-<li>表达：如何表达异常？符号/异常实例/其他对象</li>
-<li>声明：往外传递的异常是否需要声明？预期异常/非预期异常</li>
-<li>通知：如何产生一个异常的实例？同步异常/异步异常|内部异常/外部异常</li>
-<li>传递：如何传递异常？显式/隐式</li>
-<li>附加：异常处理程序可绑定到何种程序区块？代码块/函数/对象/类</li>
-<li>处理：针对异常，如何找到可以处理它的异常处理程序？静态范围/动态范围</li>
-<li>继续：异常发生之后，程序的控制流程该如何进行？终止/恢复/重试</li>
-<li>清理：无论是否发生异常，如何让程序清理资源以保持在正确的状态？</li>
-<li>可靠性检查：因为异常处理机制所造成的问题，程序语言提供何种检查？静态检查/动态检查</li>
-<li>并发性：程序语言对于并行处理程序，提供多少异常处理的支持？支持/不支持</li>
-</ol>
-<h2 id="异常安全性"><a href="#异常安全性" class="headerlink" title="异常安全性"></a>异常安全性</h2><ol>
-<li>不保证（可能正确，也可能错误）</li>
-<li>基本保证（无泄漏保证）</li>
-<li>强烈保证（具备认可或复原/全部或没有的语义，要么成功，要么失败）</li>
-<li>不抛保证（失效透明）</li>
-</ol>
-<h2 id="异常处理策略"><a href="#异常处理策略" class="headerlink" title="异常处理策略"></a>异常处理策略</h2><p>当程序执行时发生异常，首要任务就是要找到异常发生的根本原因，其次就是要厘清“谁该负责”处理这个异常。</p>
-<p>确定服务的生产者和消费者，确定服务调用的前置条件和后置条件，确定异常处理责任。</p>
-<p>所有的异常状况都有相应的报告。</p>
-<p>报告语义清楚的异常，以便协助开发团队缩短事后除错时间。</p>
-<p>针对不同的健壮性等级做不同的异常设计：错误报告 -&gt; 状态恢复 -&gt; 行为恢复。</p>
-<p>考虑容错设计。</p>
-<h2 id="缺陷处理方法"><a href="#缺陷处理方法" class="headerlink" title="缺陷处理方法"></a>缺陷处理方法</h2><ol>
-<li>缺陷避免</li>
-<li>缺陷容忍（通过错误检测与系统恢复手段，避免服务失效）</li>
-<li>缺陷移除</li>
-<li>缺陷预测</li>
-</ol>
-<h2 id="命令式异常处理"><a href="#命令式异常处理" class="headerlink" title="命令式异常处理"></a>命令式异常处理</h2><h2 id="Try"><a href="#Try" class="headerlink" title="Try"></a>Try</h2><ol>
-<li>实现需求</li>
-<li>为状态恢复做准备或制作检查点</li>
-</ol>
-<h3 id="Catch"><a href="#Catch" class="headerlink" title="Catch"></a>Catch</h3><ol>
-<li>进行错误处理与缺陷处理</li>
-<li>报告错误状况</li>
-<li>控制重试流程</li>
-</ol>
-<h3 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h3><ol>
-<li>释放资源</li>
-<li>清除检查点</li>
-</ol>
-<h2 id="异常处理设计"><a href="#异常处理设计" class="headerlink" title="异常处理设计"></a>异常处理设计</h2><ol>
-<li>用途观点（失败/通知）</li>
-<li>设计观点（声明/未声明|预期异常/非预期异常）</li>
-<li>处理观点（可恢复/不可恢复）</li>
-<li>工具支持观点（提示/无提示）</li>
-<li>流程观点</li>
-</ol>
-<p>要借助异常的上下文来确定异常的用途。</p>
-<h2 id="异常处理坏味道"><a href="#异常处理坏味道" class="headerlink" title="异常处理坏味道"></a>异常处理坏味道</h2><ul>
-<li>返回码</li>
-<li>忽略已查异常</li>
-<li>忽略异常</li>
-<li>未保护主程序</li>
-<li>空的异常处理程序</li>
-<li>嵌套 Try 语句</li>
-<li>粗心的资源清理</li>
-</ul>
-<h2 id="异常处理重构"><a href="#异常处理重构" class="headerlink" title="异常处理重构"></a>异常处理重构</h2><p>清除异常处理的坏味道（略)</p>
+        <p>Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>摘自 <a href="http://sinatrarb.com/" target="_blank" rel="noopener">Sinatra</a> 官网。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'sinatra'</span></span><br><span class="line">get <span class="string">'/frank-says'</span> <span class="keyword">do</span></span><br><span class="line">  <span class="string">'Put this in your pipe &amp; smoke it!'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://www.rubyguides.com/2017/08/how-does-sinatra-work/" target="_blank" rel="noopener">Sinatra 工作原理</a></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h2 id="技术支持"><a href="#技术支持" class="headerlink" title="技术支持"></a>技术支持</h2><h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h2 id="架构实现"><a href="#架构实现" class="headerlink" title="架构实现"></a>架构实现</h2><h2 id="代码统计"><a href="#代码统计" class="headerlink" title="代码统计"></a>代码统计</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">brew install cloc</span><br><span class="line"></span><br><span class="line">cloc .</span><br><span class="line"></span><br><span class="line"><span class="comment"># sinatra (2.0.5)</span></span><br><span class="line"></span><br><span class="line">32 text files.</span><br><span class="line">32 unique files.</span><br><span class="line">6 files ignored.</span><br><span class="line"></span><br><span class="line">github.com/AlDanial/cloc v 1.82  T=0.16 s (167.6 files/s, 229647.0 lines/s)</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Language                     files          blank        comment           code</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Markdown                        17           7457              0          25255</span><br><span class="line">Ruby                             9            430            345           2131</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">SUM:                            26           7887            345          27386</span><br><span class="line">-------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><p>Sinatra 使用标准的 Gem 项目结构，主要实现位于文件 main.rb 和 base.rb 中 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── sinatra</span><br><span class="line">│   ├── base.rb</span><br><span class="line">│   ├── images</span><br><span class="line">│   │   ├── 404.png</span><br><span class="line">│   │   └── 500.png</span><br><span class="line">│   ├── indifferent_hash.rb</span><br><span class="line">│   ├── main.rb</span><br><span class="line">│   ├── show_exceptions.rb</span><br><span class="line">│   └── version.rb</span><br><span class="line">└── sinatra.rb</span><br><span class="line"></span><br><span class="line">2 directories, 8 files</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -522,7 +455,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Exception/" rel="tag"># Exception</a>
+            <a href="/tags/Framework/" rel="tag"># Framework</a>
           
         </div>
       
@@ -535,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/19/netease-music-lyric-crawler/" rel="next" title="网易云音乐歌词爬虫">
-                <i class="fa fa-chevron-left"></i> 网易云音乐歌词爬虫
+              <a href="/2019/07/12/macos-consul/" rel="next" title="macOS 本地安装 Consul">
+                <i class="fa fa-chevron-left"></i> macOS 本地安装 Consul
               </a>
             
           </div>
@@ -545,8 +478,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/11/fall-with-ruby-again/" rel="prev" title="重拾 Ruby">
-                重拾 Ruby <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/13/fall-with-css-again/" rel="prev" title="重拾 CSS">
+                重拾 CSS <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -780,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理"><span class="nav-number">1.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常上下文"><span class="nav-number">2.</span> <span class="nav-text">异常上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理机制"><span class="nav-number">3.</span> <span class="nav-text">异常处理机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常安全性"><span class="nav-number">4.</span> <span class="nav-text">异常安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理策略"><span class="nav-number">5.</span> <span class="nav-text">异常处理策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺陷处理方法"><span class="nav-number">6.</span> <span class="nav-text">缺陷处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令式异常处理"><span class="nav-number">7.</span> <span class="nav-text">命令式异常处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Try"><span class="nav-number">8.</span> <span class="nav-text">Try</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Catch"><span class="nav-number">8.1.</span> <span class="nav-text">Catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finally"><span class="nav-number">8.2.</span> <span class="nav-text">Finally</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理设计"><span class="nav-number">9.</span> <span class="nav-text">异常处理设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理坏味道"><span class="nav-number">10.</span> <span class="nav-text">异常处理坏味道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理重构"><span class="nav-number">11.</span> <span class="nav-text">异常处理重构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">2.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">3.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术支持"><span class="nav-number">4.</span> <span class="nav-text">技术支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构设计"><span class="nav-number">5.</span> <span class="nav-text">架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构实现"><span class="nav-number">6.</span> <span class="nav-text">架构实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码统计"><span class="nav-number">7.</span> <span class="nav-text">代码统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码结构"><span class="nav-number">8.</span> <span class="nav-text">代码结构</span></a></li></ol></div>
             
 
           </div>
