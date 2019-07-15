@@ -590,16 +590,20 @@
 
       
         
+          <blockquote>
+<p>Sinatra 是一门基于 Ruby 的领域专属语言，致力于轻松、快速地创建网络应用。</p>
+</blockquote>
+<p>剖析 Sinatra 有助于进一步了解 Rack 的工作原理，有助于了解一个 Web 框架的应有的特性及其实现。</p>
+<p>Sinatra 的实现涉及到正则表达式、Ruby 元编程特性，还有 HTTP 相关知识，在剖析的过程中，都可以进行回顾和总结。</p>
+          <!--noindex-->
           
-            <p>Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>摘自 <a href="http://sinatrarb.com/" target="_blank" rel="noopener">Sinatra</a> 官网。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'sinatra'</span></span><br><span class="line">get <span class="string">'/frank-says'</span> <span class="keyword">do</span></span><br><span class="line">  <span class="string">'Put this in your pipe &amp; smoke it!'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://www.rubyguides.com/2017/08/how-does-sinatra-work/" target="_blank" rel="noopener">Sinatra 工作原理</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h2 id="技术支持"><a href="#技术支持" class="headerlink" title="技术支持"></a>技术支持</h2><h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h2 id="架构实现"><a href="#架构实现" class="headerlink" title="架构实现"></a>架构实现</h2><h2 id="代码统计"><a href="#代码统计" class="headerlink" title="代码统计"></a>代码统计</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">brew install cloc</span><br><span class="line"></span><br><span class="line">cloc .</span><br><span class="line"></span><br><span class="line"><span class="comment"># sinatra (2.0.5)</span></span><br><span class="line"></span><br><span class="line">32 text files.</span><br><span class="line">32 unique files.</span><br><span class="line">6 files ignored.</span><br><span class="line"></span><br><span class="line">github.com/AlDanial/cloc v 1.82  T=0.16 s (167.6 files/s, 229647.0 lines/s)</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Language                     files          blank        comment           code</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Markdown                        17           7457              0          25255</span><br><span class="line">Ruby                             9            430            345           2131</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">SUM:                            26           7887            345          27386</span><br><span class="line">-------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><p>Sinatra 使用标准的 Gem 项目结构，主要实现位于文件 main.rb 和 base.rb 中 。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── sinatra</span><br><span class="line">│   ├── base.rb</span><br><span class="line">│   ├── images</span><br><span class="line">│   │   ├── 404.png</span><br><span class="line">│   │   └── 500.png</span><br><span class="line">│   ├── indifferent_hash.rb</span><br><span class="line">│   ├── main.rb</span><br><span class="line">│   ├── show_exceptions.rb</span><br><span class="line">│   └── version.rb</span><br><span class="line">└── sinatra.rb</span><br><span class="line"></span><br><span class="line">2 directories, 8 files</span><br></pre></td></tr></table></figure>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/13/sinatra-under-a-microscope/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -1537,16 +1541,6 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
                     <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
@@ -1563,8 +1557,6 @@
                     
                   
                     
-                    
-                      
                     
                       
                     

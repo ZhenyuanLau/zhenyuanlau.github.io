@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。 例子摘自 Sinatra 官网。 1234require &apos;sinatra&apos;get &apos;/frank-says&apos; do  &apos;Put this in your pipe &amp;amp; smoke it!&apos;end 文档Sinatra 工作原理 原理技术支持架构设计架构实现代码统计12345678910111">
+  <meta name="description" content="Sinatra 是一门基于 Ruby 的领域专属语言，致力于轻松、快速地创建网络应用。  剖析 Sinatra 有助于进一步了解 Rack 的工作原理，有助于了解一个 Web 框架的应有的特性及其实现。 Sinatra 的实现涉及到正则表达式、Ruby 元编程特性，还有 HTTP 相关知识，在剖析的过程中，都可以进行回顾和总结。">
 <meta name="keywords" content="Framework">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sinatra 原理剖析">
 <meta property="og:url" content="https://zhenyuanlau.github.io/2019/07/13/sinatra-under-a-microscope/index.html">
 <meta property="og:site_name" content="啊哈">
-<meta property="og:description" content="Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。 例子摘自 Sinatra 官网。 1234require &apos;sinatra&apos;get &apos;/frank-says&apos; do  &apos;Put this in your pipe &amp;amp; smoke it!&apos;end 文档Sinatra 工作原理 原理技术支持架构设计架构实现代码统计12345678910111">
+<meta property="og:description" content="Sinatra 是一门基于 Ruby 的领域专属语言，致力于轻松、快速地创建网络应用。  剖析 Sinatra 有助于进一步了解 Rack 的工作原理，有助于了解一个 Web 框架的应有的特性及其实现。 Sinatra 的实现涉及到正则表达式、Ruby 元编程特性，还有 HTTP 相关知识，在剖析的过程中，都可以进行回顾和总结。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-14T07:06:48.702Z">
+<meta property="og:updated_time" content="2019-07-15T01:32:08.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sinatra 原理剖析">
-<meta name="twitter:description" content="Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。 例子摘自 Sinatra 官网。 1234require &apos;sinatra&apos;get &apos;/frank-says&apos; do  &apos;Put this in your pipe &amp;amp; smoke it!&apos;end 文档Sinatra 工作原理 原理技术支持架构设计架构实现代码统计12345678910111">
+<meta name="twitter:description" content="Sinatra 是一门基于 Ruby 的领域专属语言，致力于轻松、快速地创建网络应用。  剖析 Sinatra 有助于进一步了解 Rack 的工作原理，有助于了解一个 Web 框架的应有的特性及其实现。 Sinatra 的实现涉及到正则表达式、Ruby 元编程特性，还有 HTTP 相关知识，在剖析的过程中，都可以进行回顾和总结。">
 
 
 
@@ -422,11 +422,20 @@
       
 
       
-        <p>Sinatra 是用 Ruby 实现的一个用于 Web 应用开发的 DSL，较 Rails 轻量。</p>
+        <blockquote>
+<p>Sinatra 是一门基于 Ruby 的领域专属语言，致力于轻松、快速地创建网络应用。</p>
+</blockquote>
+<p>剖析 Sinatra 有助于进一步了解 Rack 的工作原理，有助于了解一个 Web 框架的应有的特性及其实现。</p>
+<p>Sinatra 的实现涉及到正则表达式、Ruby 元编程特性，还有 HTTP 相关知识，在剖析的过程中，都可以进行回顾和总结。</p>
+<a id="more"></a>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>摘自 <a href="http://sinatrarb.com/" target="_blank" rel="noopener">Sinatra</a> 官网。</p>
 <figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'sinatra'</span></span><br><span class="line">get <span class="string">'/frank-says'</span> <span class="keyword">do</span></span><br><span class="line">  <span class="string">'Put this in your pipe &amp; smoke it!'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://www.rubyguides.com/2017/08/how-does-sinatra-work/" target="_blank" rel="noopener">Sinatra 工作原理</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h2 id="技术支持"><a href="#技术支持" class="headerlink" title="技术支持"></a>技术支持</h2><h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h2 id="架构实现"><a href="#架构实现" class="headerlink" title="架构实现"></a>架构实现</h2><h2 id="代码统计"><a href="#代码统计" class="headerlink" title="代码统计"></a>代码统计</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">brew install cloc</span><br><span class="line"></span><br><span class="line">cloc .</span><br><span class="line"></span><br><span class="line"><span class="comment"># sinatra (2.0.5)</span></span><br><span class="line"></span><br><span class="line">32 text files.</span><br><span class="line">32 unique files.</span><br><span class="line">6 files ignored.</span><br><span class="line"></span><br><span class="line">github.com/AlDanial/cloc v 1.82  T=0.16 s (167.6 files/s, 229647.0 lines/s)</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Language                     files          blank        comment           code</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Markdown                        17           7457              0          25255</span><br><span class="line">Ruby                             9            430            345           2131</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">SUM:                            26           7887            345          27386</span><br><span class="line">-------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><blockquote>
+<p>阅读代码时，应该尽可能地利用任何能够得到地文档。</p>
+</blockquote>
+<p><a href="http://sinatrarb.com/intro-zh.html" target="_blank" rel="noopener">Sinatra README</a><br><a href="https://www.rubyguides.com/2017/08/how-does-sinatra-work/" target="_blank" rel="noopener">Sinatra 工作原理</a></p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>Sinatra 几乎包含了一个 Web 框架的所有特性。</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><h3 id="浏览器重定向"><a href="#浏览器重定向" class="headerlink" title="浏览器重定向"></a>浏览器重定向</h3><h3 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h3><h3 id="视图-模板"><a href="#视图-模板" class="headerlink" title="视图 / 模板"></a>视图 / 模板</h3><h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><h3 id="辅助方法"><a href="#辅助方法" class="headerlink" title="辅助方法"></a>辅助方法</h3><h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><h3 id="缓存控制"><a href="#缓存控制" class="headerlink" title="缓存控制"></a>缓存控制</h3><h3 id="配置-amp-环境"><a href="#配置-amp-环境" class="headerlink" title="配置 &amp; 环境"></a>配置 &amp; 环境</h3><h3 id="Rack-中间件"><a href="#Rack-中间件" class="headerlink" title="Rack 中间件"></a>Rack 中间件</h3><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h2 id="技术支持"><a href="#技术支持" class="headerlink" title="技术支持"></a>技术支持</h2><h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h2 id="架构实现"><a href="#架构实现" class="headerlink" title="架构实现"></a>架构实现</h2><h2 id="代码统计"><a href="#代码统计" class="headerlink" title="代码统计"></a>代码统计</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">brew install cloc</span><br><span class="line"></span><br><span class="line">cloc .</span><br><span class="line"></span><br><span class="line"><span class="comment"># sinatra (2.0.5)</span></span><br><span class="line"></span><br><span class="line">32 text files.</span><br><span class="line">32 unique files.</span><br><span class="line">6 files ignored.</span><br><span class="line"></span><br><span class="line">github.com/AlDanial/cloc v 1.82  T=0.16 s (167.6 files/s, 229647.0 lines/s)</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Language                     files          blank        comment           code</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Markdown                        17           7457              0          25255</span><br><span class="line">Ruby                             9            430            345           2131</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">SUM:                            26           7887            345          27386</span><br><span class="line">-------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
 <h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><p>Sinatra 使用标准的 Gem 项目结构，主要实现位于文件 main.rb 和 base.rb 中 。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── sinatra</span><br><span class="line">│   ├── base.rb</span><br><span class="line">│   ├── images</span><br><span class="line">│   │   ├── 404.png</span><br><span class="line">│   │   └── 500.png</span><br><span class="line">│   ├── indifferent_hash.rb</span><br><span class="line">│   ├── main.rb</span><br><span class="line">│   ├── show_exceptions.rb</span><br><span class="line">│   └── version.rb</span><br><span class="line">└── sinatra.rb</span><br><span class="line"></span><br><span class="line">2 directories, 8 files</span><br></pre></td></tr></table></figure>
 
@@ -586,16 +595,6 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
                     <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
@@ -612,8 +611,6 @@
                     
                   
                     
-                    
-                      
                     
                       
                     
@@ -713,7 +710,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">2.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">3.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术支持"><span class="nav-number">4.</span> <span class="nav-text">技术支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构设计"><span class="nav-number">5.</span> <span class="nav-text">架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构实现"><span class="nav-number">6.</span> <span class="nav-text">架构实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码统计"><span class="nav-number">7.</span> <span class="nav-text">代码统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码结构"><span class="nav-number">8.</span> <span class="nav-text">代码结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">2.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特性"><span class="nav-number">3.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">3.1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器重定向"><span class="nav-number">3.2.</span> <span class="nav-text">浏览器重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态文件"><span class="nav-number">3.3.</span> <span class="nav-text">静态文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图-模板"><span class="nav-number">3.4.</span> <span class="nav-text">视图 / 模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器"><span class="nav-number">3.5.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辅助方法"><span class="nav-number">3.6.</span> <span class="nav-text">辅助方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理"><span class="nav-number">3.7.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话"><span class="nav-number">3.8.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志"><span class="nav-number">3.9.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存控制"><span class="nav-number">3.10.</span> <span class="nav-text">缓存控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-amp-环境"><span class="nav-number">3.11.</span> <span class="nav-text">配置 &amp; 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rack-中间件"><span class="nav-number">3.12.</span> <span class="nav-text">Rack 中间件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">4.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术支持"><span class="nav-number">5.</span> <span class="nav-text">技术支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构设计"><span class="nav-number">6.</span> <span class="nav-text">架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构实现"><span class="nav-number">7.</span> <span class="nav-text">架构实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码统计"><span class="nav-number">8.</span> <span class="nav-text">代码统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码结构"><span class="nav-number">9.</span> <span class="nav-text">代码结构</span></a></li></ol></div>
             
 
           </div>
