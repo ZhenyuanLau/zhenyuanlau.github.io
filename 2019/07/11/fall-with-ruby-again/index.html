@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/zhenyuanlau/cdn/blob/master/images/ruby-object-system.jpg?raw=true">
 <meta property="og:image" content="https://github.com/zhenyuanlau/cdn/blob/master/images/ruby-web-app.jpg?raw=true">
-<meta property="og:updated_time" content="2019-07-20T08:14:02.720Z">
+<meta property="og:updated_time" content="2019-07-25T01:30:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重拾 Ruby">
 <meta name="twitter:description" content="从 2018 年底至今，写了快一年的 Scala 应用程序，重拾一下 Ruby。近乎涉及 Ruby 开发的所有方面，当然不可能全面。">
@@ -354,6 +354,7 @@
         
 
         <div class="post-meta">
+          
           <span class="post-time">
 
             
@@ -377,6 +378,14 @@
 
             
           </span>
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-07-25T09:30:24+08:00" content="2019-07-25">
+                2019-07-25
+              </time>
+            </span>
+          
 
           
             <span class="post-category">
@@ -441,6 +450,7 @@
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">a.map &#123; <span class="params">|item|</span> item * <span class="number">3</span> &#125;</span><br><span class="line">a.filter &#123; <span class="params">|item|</span> item.odd? &#125;</span><br><span class="line">a.reduce(<span class="number">0</span>) &#123; <span class="params">|a, b|</span> a + b &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h4><p>见《理解 Unix 进程》和《理解 Ruby 线程》。</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thr = Thread.new &#123; puts <span class="string">"Whats the big deal"</span> &#125;</span><br><span class="line">thr.join</span><br></pre></td></tr></table></figure>
+<h4 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h4><p><a href="https://www.codeotaku.com/journal/2018-06/asynchronous-ruby/index" target="_blank" rel="noopener">Asynchronous Ruby</a></p>
 <h4 id="分布式编程"><a href="#分布式编程" class="headerlink" title="分布式编程"></a>分布式编程</h4><p>见 《分布式 Ruby 编程》。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>Ruby 是一门通用语言，支持多种编程范式。Ruby 优雅而灵活，是程序员的朋友。</p>
 <h2 id="Ruby-元编程"><a href="#Ruby-元编程" class="headerlink" title="Ruby 元编程"></a>Ruby 元编程</h2><p>一图胜千言。</p>
@@ -596,7 +606,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -633,7 +643,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -684,7 +702,31 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -748,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-编程"><span class="nav-number">1.</span> <span class="nav-text">Ruby 编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工具"><span class="nav-number">1.1.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RVM"><span class="nav-number">1.1.1.</span> <span class="nav-text">RVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pry"><span class="nav-number">1.1.2.</span> <span class="nav-text">Pry</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPL"><span class="nav-number">1.2.</span> <span class="nav-text">REPL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语言特性"><span class="nav-number">1.3.</span> <span class="nav-text">语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象编程"><span class="nav-number">1.3.1.</span> <span class="nav-text">面向对象编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式编程"><span class="nav-number">1.3.2.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并发编程"><span class="nav-number">1.3.3.</span> <span class="nav-text">并发编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式编程"><span class="nav-number">1.3.4.</span> <span class="nav-text">分布式编程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-元编程"><span class="nav-number">2.</span> <span class="nav-text">Ruby 元编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#include-和-extend"><span class="nav-number">2.1.</span> <span class="nav-text">include 和 extend</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-原理剖析"><span class="nav-number">3.</span> <span class="nav-text">Ruby 原理剖析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-进程"><span class="nav-number">4.</span> <span class="nav-text">Ruby 进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-线程"><span class="nav-number">5.</span> <span class="nav-text">Ruby 线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-网络编程"><span class="nav-number">6.</span> <span class="nav-text">Ruby 网络编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-分布式编程"><span class="nav-number">7.</span> <span class="nav-text">Ruby 分布式编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-应用"><span class="nav-number">8.</span> <span class="nav-text">Ruby 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rack"><span class="nav-number">8.1.</span> <span class="nav-text">Rack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sinatra"><span class="nav-number">8.2.</span> <span class="nav-text">Sinatra</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sinatra-应用"><span class="nav-number">8.2.1.</span> <span class="nav-text">Sinatra 应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sinatra-剖析"><span class="nav-number">8.2.2.</span> <span class="nav-text">Sinatra 剖析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thin"><span class="nav-number">8.3.</span> <span class="nav-text">Thin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rails"><span class="nav-number">8.4.</span> <span class="nav-text">Rails</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Puma"><span class="nav-number">8.5.</span> <span class="nav-text">Puma</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-编程"><span class="nav-number">1.</span> <span class="nav-text">Ruby 编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工具"><span class="nav-number">1.1.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RVM"><span class="nav-number">1.1.1.</span> <span class="nav-text">RVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pry"><span class="nav-number">1.1.2.</span> <span class="nav-text">Pry</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPL"><span class="nav-number">1.2.</span> <span class="nav-text">REPL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语言特性"><span class="nav-number">1.3.</span> <span class="nav-text">语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象编程"><span class="nav-number">1.3.1.</span> <span class="nav-text">面向对象编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式编程"><span class="nav-number">1.3.2.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并发编程"><span class="nav-number">1.3.3.</span> <span class="nav-text">并发编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步编程"><span class="nav-number">1.3.4.</span> <span class="nav-text">异步编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式编程"><span class="nav-number">1.3.5.</span> <span class="nav-text">分布式编程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-元编程"><span class="nav-number">2.</span> <span class="nav-text">Ruby 元编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#include-和-extend"><span class="nav-number">2.1.</span> <span class="nav-text">include 和 extend</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-原理剖析"><span class="nav-number">3.</span> <span class="nav-text">Ruby 原理剖析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-进程"><span class="nav-number">4.</span> <span class="nav-text">Ruby 进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-线程"><span class="nav-number">5.</span> <span class="nav-text">Ruby 线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-网络编程"><span class="nav-number">6.</span> <span class="nav-text">Ruby 网络编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-分布式编程"><span class="nav-number">7.</span> <span class="nav-text">Ruby 分布式编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-应用"><span class="nav-number">8.</span> <span class="nav-text">Ruby 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rack"><span class="nav-number">8.1.</span> <span class="nav-text">Rack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sinatra"><span class="nav-number">8.2.</span> <span class="nav-text">Sinatra</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sinatra-应用"><span class="nav-number">8.2.1.</span> <span class="nav-text">Sinatra 应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sinatra-剖析"><span class="nav-number">8.2.2.</span> <span class="nav-text">Sinatra 剖析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thin"><span class="nav-number">8.3.</span> <span class="nav-text">Thin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rails"><span class="nav-number">8.4.</span> <span class="nav-text">Rails</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Puma"><span class="nav-number">8.5.</span> <span class="nav-text">Puma</span></a></li></ol></li></ol></div>
             
 
           </div>
