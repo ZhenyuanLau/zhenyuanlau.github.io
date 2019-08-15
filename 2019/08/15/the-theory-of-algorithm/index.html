@@ -58,14 +58,14 @@
   <meta name="description" content="在学习数据结构与算法的时候，有很多理论上的概念需要厘清，有必要做专门的梳理与探讨。 数据结构与算法的理论，刨除了算法的具体设计思路与代码实现，关注使用大 O 记法做算法分析——时间复杂度和空间复杂度分析。 理解数据结构与算法和编程之间的关系，也有利于驱动我们学习数据结构与算法。 我将算法理论相关的知识大致梳理为以下几个方面：  数据结构与算法和日常开发时间的联系； 理解大 O 记法，分析算法的时间">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法相关理论知识">
+<meta property="og:title" content="数据结构与算法发微">
 <meta property="og:url" content="https://zhenyuanlau.github.io/2019/08/15/the-theory-of-algorithm/index.html">
 <meta property="og:site_name" content="啊哈">
 <meta property="og:description" content="在学习数据结构与算法的时候，有很多理论上的概念需要厘清，有必要做专门的梳理与探讨。 数据结构与算法的理论，刨除了算法的具体设计思路与代码实现，关注使用大 O 记法做算法分析——时间复杂度和空间复杂度分析。 理解数据结构与算法和编程之间的关系，也有利于驱动我们学习数据结构与算法。 我将算法理论相关的知识大致梳理为以下几个方面：  数据结构与算法和日常开发时间的联系； 理解大 O 记法，分析算法的时间">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-15T00:25:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法相关理论知识">
+<meta name="twitter:title" content="数据结构与算法发微">
 <meta name="twitter:description" content="在学习数据结构与算法的时候，有很多理论上的概念需要厘清，有必要做专门的梳理与探讨。 数据结构与算法的理论，刨除了算法的具体设计思路与代码实现，关注使用大 O 记法做算法分析——时间复杂度和空间复杂度分析。 理解数据结构与算法和编程之间的关系，也有利于驱动我们学习数据结构与算法。 我将算法理论相关的知识大致梳理为以下几个方面：  数据结构与算法和日常开发时间的联系； 理解大 O 记法，分析算法的时间">
   <link rel="canonical" href="https://zhenyuanlau.github.io/2019/08/15/the-theory-of-algorithm/">
 
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>算法相关理论知识 | 啊哈</title>
+  <title>数据结构与算法发微 | 啊哈</title>
   
 
 
@@ -261,7 +261,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">算法相关理论知识
+          <h1 class="post-title" itemprop="name headline">数据结构与算法发微
 
             
           </h1>
@@ -296,7 +296,7 @@
           
 
           
-            <span id="/2019/08/15/the-theory-of-algorithm/" class="post-meta-item leancloud_visitors" data-flag-title="算法相关理论知识" title="阅读次数">
+            <span id="/2019/08/15/the-theory-of-algorithm/" class="post-meta-item leancloud_visitors" data-flag-title="数据结构与算法发微" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -343,11 +343,26 @@
 </ol>
 <p>剩下的工作，就是深入理解常用算法的设计思路、代码实现、效率分析。</p>
 <a id="more"></a>
-<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>数据结构能帮助改善代码的可读性和可维护性。</p>
-<blockquote>
-<p>很多看似复杂、深奥的事物，其实都是由你所掌握的简单概念构筑而成的。<br>所有技术讨论，当需要做出取舍时，你应从全局看待问题。</p>
+<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><blockquote>
+<p>很多看似复杂、深奥的事物，其实都是由你所掌握的简单概念构筑而成的。</p>
 </blockquote>
-<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><p>最理想的算法：既省时又省内存。</p>
+<h3 id="为什么要重要"><a href="#为什么要重要" class="headerlink" title="为什么要重要"></a>为什么要重要</h3><p>程序 = 数据结构 + 算法</p>
+<p>以上公式，说明了数据结构与算法的重要性。</p>
+<p>只要编程，我们就会遇到数据结构与算法问题。只是我们在工作中，主要面向领域编程，逻辑粒度比较大，基于语言内置接口及类库和框架提供的接口，我们能够轻松地完成日常的研发任务。<br>只有当遇到性能问题时，我们才需要去考虑实现中使用的数据结构和算法。<br>面试中或课堂上的一些算法问题的实现，都隐藏在这些接口中了。如果不是面试的需要，我们很可能不关注数据结构和算法。</p>
+<p>我认为，数据结构和算法同数学一样，能够严密我们的逻辑思维，提升我们解决问题的能力。</p>
+<h3 id="数据与处理"><a href="#数据与处理" class="headerlink" title="数据与处理"></a>数据与处理</h3><p>数据结构与算法共同确定了代码的速度。数据结构是数据的组织形式；算法是解决某个问题的一套流程，指某项操作的过程。</p>
+<p>数据结构能帮助改善代码的可读性和可维护性。</p>
+<p>数据结构不只是用于组织数据，还极大地影响着代码的运行速度。</p>
+<p>不同的数据结构有不同的时间复杂度，不同的算法（即使是用同一种数据结构）也有不同的时间复杂度。</p>
+<p>一般地，数据结构都有 读取、查找、插入、删除 4 种操作。</p>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><blockquote>
+<p>所有技术讨论，当需要做出取舍时，你应从全局看待问题。</p>
+</blockquote>
+<p>最理想的算法：既省时又省内存。</p>
+<p>世界上并没有哪种适用于所有场景的数据结构或者算法。</p>
+<blockquote>
+<p>操作的速度（时间复杂度，效率、性能），并不按时间计算，而是按步数计算。</p>
+</blockquote>
 <p>大 O 记法能客观地衡量各种算法的时间复杂度，是比较算法的专业工具。</p>
 <p>同一算法，在不同的场景下（最好情况、最坏情况、平均情况），性能是不同的，大 O 记法一般都是指最坏情况。</p>
 <p>最好情况和最坏情况很少发生。现实世界里，最常出现的是平均情况。要乐观地调优。</p>
@@ -406,9 +421,11 @@
 <li>深度优先搜索</li>
 <li>Dijkstra 算法</li>
 </ul>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>接下来，我们着眼于特定算法的设计思路、代码实现、效率分析三个方面。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>接下来，我们着眼于特定算法的适用场景、设计思路、代码实现、效率分析三个方面。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>《图解数据结构与算法》</li>
+<li><a href="http://www.10tiao.com/html/557/201708/2652730711/1.html" target="_blank" rel="noopener">工程师面试，为什么要考算法和写代码？</a></li>
+<li><a href="https://posts.careerengine.us/p/5d0a35b1bf24494a034ad99c" target="_blank" rel="noopener">Google大神：为什么大厂面试喜欢考算法？</a></li>
 </ul>
 
     </div>
@@ -676,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与算法"><span class="nav-number">1.</span> <span class="nav-text">数据结构与算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法分析"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大-O-记法"><span class="nav-number">3.</span> <span class="nav-text">大 O 记法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#描述时间复杂度的大-O-记法"><span class="nav-number">3.1.</span> <span class="nav-text">描述时间复杂度的大 O 记法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数步数"><span class="nav-number">3.1.1.</span> <span class="nav-text">数步数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#规则"><span class="nav-number">3.1.2.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常数时间与线性时间"><span class="nav-number">3.1.3.</span> <span class="nav-text">常数时间与线性时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对数时间"><span class="nav-number">3.1.4.</span> <span class="nav-text">对数时间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述空间复杂度的大-O-记法"><span class="nav-number">3.2.</span> <span class="nav-text">描述空间复杂度的大 O 记法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的数据结构"><span class="nav-number">4.</span> <span class="nav-text">常用的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的算法"><span class="nav-number">5.</span> <span class="nav-text">常用的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">6.</span> <span class="nav-text">写在最后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与算法"><span class="nav-number">1.</span> <span class="nav-text">数据结构与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要重要"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据与处理"><span class="nav-number">1.2.</span> <span class="nav-text">数据与处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法分析"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大-O-记法"><span class="nav-number">3.</span> <span class="nav-text">大 O 记法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#描述时间复杂度的大-O-记法"><span class="nav-number">3.1.</span> <span class="nav-text">描述时间复杂度的大 O 记法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数步数"><span class="nav-number">3.1.1.</span> <span class="nav-text">数步数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#规则"><span class="nav-number">3.1.2.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常数时间与线性时间"><span class="nav-number">3.1.3.</span> <span class="nav-text">常数时间与线性时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对数时间"><span class="nav-number">3.1.4.</span> <span class="nav-text">对数时间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述空间复杂度的大-O-记法"><span class="nav-number">3.2.</span> <span class="nav-text">描述空间复杂度的大 O 记法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的数据结构"><span class="nav-number">4.</span> <span class="nav-text">常用的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的算法"><span class="nav-number">5.</span> <span class="nav-text">常用的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">6.</span> <span class="nav-text">写在最后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
