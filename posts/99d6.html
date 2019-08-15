@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.7.1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+  <meta name="google-site-verification" content="YzBZ2mJ_RO46hMHwEou5lmDH4NBXlHoitL3Y3I1XcgU">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="《程序是怎样跑起来的》摘录。 程序的运行过程是一个复杂的过程，《程序是怎样跑起来的》只呈现了一个完整的、粗糙的视图，但对消解程序运行机理的神秘感却极为有益。 《程序是怎么跑起来的》中的一些观点，也能够给人以启迪，如“程序员只需要了解寄存器即可”，计算机中的实体，都是相对透明的，可以视为不存在，直到你关注它。 抽象的力量是无穷的！ 我们可以按照计算机启动的过程来构建程序运行过程中涉及的知识。 了解程">
+<meta name="keywords" content="Program">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程序运行原理剖析">
+<meta property="og:url" content="https://zhenyuanlau.github.io/posts/99d6.html">
+<meta property="og:site_name" content="啊哈">
+<meta property="og:description" content="《程序是怎样跑起来的》摘录。 程序的运行过程是一个复杂的过程，《程序是怎样跑起来的》只呈现了一个完整的、粗糙的视图，但对消解程序运行机理的神秘感却极为有益。 《程序是怎么跑起来的》中的一些观点，也能够给人以启迪，如“程序员只需要了解寄存器即可”，计算机中的实体，都是相对透明的，可以视为不存在，直到你关注它。 抽象的力量是无穷的！ 我们可以按照计算机启动的过程来构建程序运行过程中涉及的知识。 了解程">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-13T02:48:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="程序运行原理剖析">
+<meta name="twitter:description" content="《程序是怎样跑起来的》摘录。 程序的运行过程是一个复杂的过程，《程序是怎样跑起来的》只呈现了一个完整的、粗糙的视图，但对消解程序运行机理的神秘感却极为有益。 《程序是怎么跑起来的》中的一些观点，也能够给人以启迪，如“程序员只需要了解寄存器即可”，计算机中的实体，都是相对透明的，可以视为不存在，直到你关注它。 抽象的力量是无穷的！ 我们可以按照计算机启动的过程来构建程序运行过程中涉及的知识。 了解程">
+  <link rel="canonical" href="https://zhenyuanlau.github.io/posts/99d6">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>程序运行原理剖析 | 啊哈</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">啊哈</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">认识你自己</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhenyuanlau.github.io/posts/99d6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘振源">
+      <meta itemprop="description" content="个人网站">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="啊哈">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">程序运行原理剖析
+
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-06 07:54:01" itemprop="dateCreated datePublished" datetime="2019-08-06T07:54:01+08:00">2019-08-06</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Microscope/" itemprop="url" rel="index"><span itemprop="name">Microscope</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/posts/99d6.html" class="post-meta-item leancloud_visitors" data-flag-title="程序运行原理剖析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/99d6.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/99d6.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>《程序是怎样跑起来的》摘录。</p>
+<p>程序的运行过程是一个复杂的过程，《程序是怎样跑起来的》只呈现了一个完整的、粗糙的视图，但对消解程序运行机理的神秘感却极为有益。</p>
+<p>《程序是怎么跑起来的》中的一些观点，也能够给人以启迪，如“程序员只需要了解寄存器即可”，计算机中的实体，都是相对透明的，可以视为不存在，直到你关注它。</p>
+<p>抽象的力量是无穷的！</p>
+<p>我们可以按照计算机启动的过程来构建程序运行过程中涉及的知识。</p>
+<p>了解程序运行原理，熟悉程序运行过程中涉及的软件和硬件，有助于构建一个大的知识背景。</p>
+<p>计算机系统是一个抽象层次体系，我们可能工作在不同的抽象层上，我们可能关注不同的系统行为，我们可以不关心，但不能不知道。</p>
+<a id="more"></a>
+<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>程序 = 指令 + 数据（用于运算的数值/表示内存地址的数值）</p>
+<p><em>程序员只需要了解寄存器即可！</em> 程序是把寄存器作为对象来描述的。在程序员看来，CPU 是寄存器的集合体。</p>
+<p>所谓的控制，就是指数据运算以外的处理（主要是数据输入输出的时机控制）</p>
+<p>计算机电子部件 IC，IC 引脚 0V 和 5V，该特性决定了计算机的信息数据只能用二进制数来处理。</p>
+<p>有了二进制，加上布尔逻辑，我们就可以实现基本的逻辑电路了。</p>
+<p>集成电路(IC): CPU = 寄存器 + 控制器 + 运算器 + 时钟(时钟信号/电流信号)</p>
+<p>从物理上（硬件）和逻辑上（软件）理解程序是怎么跑起来的！</p>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><ul>
+<li>累加寄存器(1)</li>
+<li><em>标志寄存器(1)</em></li>
+<li><em>程序计数器(1)</em></li>
+<li>基址寄存器(n)</li>
+<li>变址寄存器(n)</li>
+<li>通用寄存器(n)</li>
+<li>指令寄存器(1)</li>
+<li>栈寄存器(1)</li>
+</ul>
+<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><h3 id="物理上"><a href="#物理上" class="headerlink" title="物理上"></a>物理上</h3><p>(DRAM/SRAM/ROM) -&gt; IC</p>
+<ul>
+<li>电源 VCC/GND</li>
+<li>地址信号 A0~An</li>
+<li>数据信号 D0~Dn</li>
+<li>控制信号 RD/WR</li>
+</ul>
+<p>使能 RD，读取 D<br>使能 WR，写入 A</p>
+<h3 id="逻辑上"><a href="#逻辑上" class="headerlink" title="逻辑上"></a>逻辑上</h3><p>1 字节类型的数组和内存的物理构造完全一致。</p>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><ul>
+<li>数据传输指令(寄存器和内存/内存和内存/寄存器和外围设备之间的数据读写操作)</li>
+<li>运算指令(用累加寄存器执行算术运算/逻辑运算/比较运算/移位运算)</li>
+<li>跳转指令(实现条件分支/循环/强制跳转等)</li>
+<li>call/return 指令(函数的调用/返回调用前的地址)</li>
+</ul>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>数据是用二进制表示的。</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><ul>
+<li>队列</li>
+<li>栈</li>
+<li>链表</li>
+<li>二叉树</li>
+</ul>
+<h2 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h2><p>利用操作系统的系统调用可以实现对硬件的控制。</p>
+<p>操作系统借助输入输出指令控制硬件。</p>
+<p>IN 指令通过指定端口号的端口输入数据，并将其存储在 CPU 内部的寄存器中；<br>OUT 指令将存储在 CPU 寄存器中的数据，输出到指定端口号的端口。</p>
+<p>主机 - 连接器（IO控制器）- 外设</p>
+<p>IO 控制器中有用于临时保存输入输出数据的内存，这个内存就是端口。</p>
+<p>各端口之间通过端口号区分，端口号也称为 IO 地址。</p>
+<p>中断处理：<br>实施中断请求的是连接外围设备的 IO 控制器，负责实施中断处理程序的是 CPU。</p>
+<p>用中断来实现实时处理。</p>
+<p>DMA vs. IRQ</p>
+<h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><p>使用助记符，包含指令和伪指令，汇编指令与机器指令一一对应。</p>
+<p>汇编指令 = 操作码 [+ 操作数]。</p>
+<p>通过查看汇编语言编写的源代码，就可以了解程序的本质了。</p>
+<p>汇编：汇编代码 - 汇编器 - &gt; 机器代码<br>反汇编（反向工程）：机器代码 - 反汇编程序  -&gt; 汇编代码</p>
+<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h3><h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><h2 id="C-语言"><a href="#C-语言" class="headerlink" title="C 语言"></a>C 语言</h2><p>在 C 语言中，数据用变量表示，处理用函数表示，C 程序由变量和函数构成。</p>
+<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><p>操作系统的原型是监控程序，负责程序的加载和运行。</p>
+<p>初期的操作系统 = 监控程序 + 基本的输入输出程序</p>
+<p>应用程序通过操作系统间接地控制硬件。</p>
+<p>操作系统和高级编程语言都可以视为硬件的抽象。</p>
+<p>设备驱动是操作系统的一部分，提供了同硬件进行基本的输入输出的功能。</p>
+<p>运行环境=操作系统 + 硬件</p>
+<p>开机 -&gt; BIOS -&gt; 引导程序 -&gt; 操作系统 -&gt;  系统软件 + 应用软件</p>
+<h2 id="跑起来"><a href="#跑起来" class="headerlink" title="跑起来"></a>跑起来</h2><blockquote>
+<p>CPU 的基本工作是执行存储的指令序列，即程序。程序的执行过程实际上是不断地取出指令、分析指令、执行指令的过程。</p>
+</blockquote>
+<p>CPU 从存放程序的主存储器里取出一条指令，译码并执行这条指令，保存执行结果，紧接着又去取指令，译码，执行指令……，如此周而复始，反复循环，使得计算机能够自动地工作。除非遇到停机指令，否则这个循环将一直进行下去。</p>
+<p>几乎所有的冯•诺伊曼型计算机的CPU，其工作都可以分为5个阶段：</p>
+<ul>
+<li>取指令</li>
+<li>指令译码</li>
+<li>执行指令</li>
+<li>访存取数和结果写回</li>
+</ul>
+<p>计算机设计的基本思想是 “程序存储控制”，即程序存储和程序控制。</p>
+<p>当一台裸机按下电源键，咦？安装一个 GNU/Linux 操作系统，就这样跑起来了！</p>
+<p>背后的机理有些烦复，待续……</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://software.intel.com/zh-cn/articles/book-Processor-Architecture_CPU_work_process" target="_blank" rel="noopener">CPU的工作过程</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Program/" rel="tag"># Program</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/posts/ec9a.html" rel="next" title="深入理解分布式系统">
+                  <i class="fa fa-chevron-left"></i> 深入理解分布式系统
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/posts/6872.html" rel="prev" title="个人技术栈">
+                  个人技术栈 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="刘振源">
+  <p class="site-author-name" itemprop="name">刘振源</p>
+  <div class="site-description motion-element" itemprop="description">个人网站</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/zhenyuanlau" title="GitHub &rarr; https://github.com/zhenyuanlau" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:zhenyuanlau@outlook.com" title="E-Mail &rarr; mailto:zhenyuanlau@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器"><span class="nav-number">2.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">3.</span> <span class="nav-text">内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#物理上"><span class="nav-number">3.1.</span> <span class="nav-text">物理上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑上"><span class="nav-number">3.2.</span> <span class="nav-text">逻辑上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令"><span class="nav-number">4.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">5.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-number">6.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘"><span class="nav-number">7.</span> <span class="nav-text">磁盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编"><span class="nav-number">8.</span> <span class="nav-text">汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数调用"><span class="nav-number">8.1.</span> <span class="nav-text">函数调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-number">8.2.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">8.3.</span> <span class="nav-text">循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-语言"><span class="nav-number">9.</span> <span class="nav-text">C 语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">10.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跑起来"><span class="nav-number">11.</span> <span class="nav-text">跑起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘振源</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log(`Failed to save Visitor num, with error message: ${responseJSON.error}`);
+              })
+          } else {
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
+    }
+  }
+
+  $(function() {
+    $.get('https://app-router.leancloud.cn/2/route?appId=' + 'K5KxjxPAToj88H7LO59ykbig-gzGzoHsz')
+      .done(function({ api_server }) {
+        var Counter = function(method, url, data) {
+          return $.ajax({
+            method: method,
+            url: `https://${api_server}/1.1${url}`,
+            headers: {
+              'X-LC-Id': 'K5KxjxPAToj88H7LO59ykbig-gzGzoHsz',
+              'X-LC-Key': 'ibMOmCEzBXpk5U604Eix9laC',
+              'Content-Type': 'application/json',
+            },
+            data: data
+          });
+        };
+        if (CONFIG.page.isPost) {
+          const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+          if (localhost.test(document.URL)) return;
+          addCount(Counter);
+        } else {
+          if ($('.post-title-link').length >= 1) {
+            showTime(Counter);
+          }
+        }
+      });
+  });
+  </script>
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+    
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'K5KxjxPAToj88H7LO59ykbig-gzGzoHsz',
+    appKey: 'ibMOmCEzBXpk5U604Eix9laC',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.7.1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+  <meta name="google-site-verification" content="YzBZ2mJ_RO46hMHwEou5lmDH4NBXlHoitL3Y3I1XcgU">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="每天半小时，在“肥仔”旁边看书，最近看《精通 CSS》，“肥仔”是我的同事，搞前端。 摘录了书中的知识框架，需要填充一些细节，又感觉无趣，不搞前端有段时间了，工作中没有机会，稍记后补。 响应式布局——页面布局——内容布局——定位——浮动及清除——排版和特效。">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重拾 CSS">
+<meta property="og:url" content="https://zhenyuanlau.github.io/p/c16d.html">
+<meta property="og:site_name" content="啊哈">
+<meta property="og:description" content="每天半小时，在“肥仔”旁边看书，最近看《精通 CSS》，“肥仔”是我的同事，搞前端。 摘录了书中的知识框架，需要填充一些细节，又感觉无趣，不搞前端有段时间了，工作中没有机会，稍记后补。 响应式布局——页面布局——内容布局——定位——浮动及清除——排版和特效。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-14T00:18:18.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重拾 CSS">
+<meta name="twitter:description" content="每天半小时，在“肥仔”旁边看书，最近看《精通 CSS》，“肥仔”是我的同事，搞前端。 摘录了书中的知识框架，需要填充一些细节，又感觉无趣，不搞前端有段时间了，工作中没有机会，稍记后补。 响应式布局——页面布局——内容布局——定位——浮动及清除——排版和特效。">
+  <link rel="canonical" href="https://zhenyuanlau.github.io/p/c16d">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>重拾 CSS | 啊哈</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">啊哈</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">认识你自己</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhenyuanlau.github.io/p/c16d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘振源">
+      <meta itemprop="description" content="个人网站">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="啊哈">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">重拾 CSS
+
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-13 09:32:57" itemprop="dateCreated datePublished" datetime="2019-07-13T09:32:57+08:00">2019-07-13</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Language/" itemprop="url" rel="index"><span itemprop="name">Language</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/p/c16d.html" class="post-meta-item leancloud_visitors" data-flag-title="重拾 CSS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/c16d.html#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/c16d.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>每天半小时，在“肥仔”旁边看书，最近看《精通 CSS》，“肥仔”是我的同事，搞前端。</p>
+<p>摘录了书中的知识框架，需要填充一些细节，又感觉无趣，不搞前端有段时间了，工作中没有机会，稍记后补。</p>
+<p>响应式布局——页面布局——内容布局——定位——浮动及清除——排版和特效。</p>
+<a id="more"></a>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>通过关注点分离，在宏观上将网页拆分为结构、样式、行为三个方面。HTML 负责结构，CSS 负责样式，JavaScript 负责行为，简直完美！<br>当然，关注点分离策略可以具体到每个方面。</p>
+<p>渐进增强是另一个总要的策略，保持特性向后兼容。</p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>HTML 负责网页的结构，创建结构化、语义化 HTML 文档是添加样式/行为的基础。</p>
+<p>语义化标签：</p>
+<ul>
+<li>header</li>
+<li>nav</li>
+<li>main</li>
+<li>aside</li>
+<li>article</li>
+<li>footer</li>
+</ul>
+<p>扩展 HTML 语义？</p>
+<h3 id="包装元素"><a href="#包装元素" class="headerlink" title="包装元素"></a>包装元素</h3><p>尽可能保持最简结构，必要时添加包装元素，以支持浮动、定位、布局。</p>
+<h3 id="接入点"><a href="#接入点" class="headerlink" title="接入点"></a>接入点</h3><p>基于适当的样式接入点，利用多种选择器，应用样式规则。</p>
+<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><ul>
+<li>ID 选择器</li>
+<li>类型选择器</li>
+<li>类选择器</li>
+<li>后代选择器</li>
+<li>子选择器</li>
+<li>同辈选择器</li>
+<li>通用选择器</li>
+<li>属性选择器</li>
+<li>伪元素选择器</li>
+<li>伪类（结构化伪类、表单伪类）</li>
+</ul>
+<h3 id="重要性"><a href="#重要性" class="headerlink" title="重要性"></a>重要性</h3><ol>
+<li>标注为 !important 的用户样式；</li>
+<li>标注为 !important 的作者样式；</li>
+<li>作者样式；</li>
+<li>用户样式；</li>
+<li>浏览器（或用户代码）的默认样式。</li>
+</ol>
+<h3 id="特殊性"><a href="#特殊性" class="headerlink" title="特殊性"></a>特殊性</h3><p>基于位置计算规则的特殊性，不同选择器对应不同的数值，规则的特殊性等于每个选择器的累加数值。</p>
+<ul>
+<li>行内样式，a 为 1；</li>
+<li>b 等于 ID 选择器的数目；</li>
+<li>c 等于类选择器、伪类选择器、属性选择器的数目；</li>
+<li>d 等于类型选择器和伪元素选择器的数目。</li>
+</ul>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h3 id="层叠次序"><a href="#层叠次序" class="headerlink" title="层叠次序"></a>层叠次序</h3><p>重要性高的样式覆盖重要性低的样式；特殊性高的样式覆盖特殊性低的样式；后定义的样式覆盖先定义的样式。</p>
+<h3 id="应用样式"><a href="#应用样式" class="headerlink" title="应用样式"></a>应用样式</h3><ol>
+<li>行内样式；</li>
+<li>内联样式；</li>
+<li>外部样式；</li>
+</ol>
+<h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>宽度、高度、内边距、边框、外边距。</p>
+<h3 id="块级盒子"><a href="#块级盒子" class="headerlink" title="块级盒子"></a>块级盒子</h3><p>从上到下，垂直堆叠。</p>
+<h3 id="行内盒子"><a href="#行内盒子" class="headerlink" title="行内盒子"></a>行内盒子</h3><p>从左到右，水平展开。</p>
+<h3 id="行盒子"><a href="#行盒子" class="headerlink" title="行盒子"></a>行盒子</h3><p>一行文本构成一个行盒子。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">36px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="匿名盒子"><a href="#匿名盒子" class="headerlink" title="匿名盒子"></a>匿名盒子</h3><h3 id="格式化上下文（模型）"><a href="#格式化上下文（模型）" class="headerlink" title="格式化上下文（模型）"></a>格式化上下文（模型）</h3><h4 id="包含块-起始包含块"><a href="#包含块-起始包含块" class="headerlink" title="包含块/起始包含块"></a>包含块/起始包含块</h4><h4 id="外边距折叠"><a href="#外边距折叠" class="headerlink" title="外边距折叠"></a>外边距折叠</h4><p>在正常文档流中，块级盒子发生外边距折叠。</p>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><h3 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(2, 1fr);</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(5, 1fr);</span><br><span class="line">  <span class="attribute">grid-column-gap</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">grid-row-gap</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="内容布局"><a href="#内容布局" class="headerlink" title="内容布局"></a>内容布局</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.flexbox</span> <span class="selector-class">.row</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.flexbox</span> <span class="selector-class">.col</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.flexbox</span> <span class="selector-class">.col</span> &gt; * &#123;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="绝对定位"><a href="#绝对定位" class="headerlink" title="绝对定位"></a>绝对定位</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> <span class="selector-tag">float</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 清除</span><br><span class="line"><span class="selector-class">.container</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><h2 id="特效"><a href="#特效" class="headerlink" title="特效"></a>特效</h2><h3 id="变换"><a href="#变换" class="headerlink" title="变换"></a>变换</h3><h3 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h3><h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><h3 id="滤镜"><a href="#滤镜" class="headerlink" title="滤镜"></a>滤镜</h3>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/p/1e4d.html" rel="next" title="Sinatra 原理剖析">
+                  <i class="fa fa-chevron-left"></i> Sinatra 原理剖析
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/p/5017.html" rel="prev" title="超赞文章合集">
+                  超赞文章合集 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="刘振源">
+  <p class="site-author-name" itemprop="name">刘振源</p>
+  <div class="site-description motion-element" itemprop="description">个人网站</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/zhenyuanlau" title="GitHub &rarr; https://github.com/zhenyuanlau" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:zhenyuanlau@outlook.com" title="E-Mail &rarr; mailto:zhenyuanlau@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构"><span class="nav-number">1.1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包装元素"><span class="nav-number">1.2.</span> <span class="nav-text">包装元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接入点"><span class="nav-number">1.3.</span> <span class="nav-text">接入点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择器"><span class="nav-number">1.4.</span> <span class="nav-text">选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重要性"><span class="nav-number">1.5.</span> <span class="nav-text">重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊性"><span class="nav-number">1.6.</span> <span class="nav-text">特殊性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">1.7.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层叠次序"><span class="nav-number">1.8.</span> <span class="nav-text">层叠次序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用样式"><span class="nav-number">1.9.</span> <span class="nav-text">应用样式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盒模型"><span class="nav-number">2.</span> <span class="nav-text">盒模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级盒子"><span class="nav-number">2.2.</span> <span class="nav-text">块级盒子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行内盒子"><span class="nav-number">2.3.</span> <span class="nav-text">行内盒子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行盒子"><span class="nav-number">2.4.</span> <span class="nav-text">行盒子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名盒子"><span class="nav-number">2.5.</span> <span class="nav-text">匿名盒子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化上下文（模型）"><span class="nav-number">2.6.</span> <span class="nav-text">格式化上下文（模型）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#包含块-起始包含块"><span class="nav-number">2.6.1.</span> <span class="nav-text">包含块/起始包含块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外边距折叠"><span class="nav-number">2.6.2.</span> <span class="nav-text">外边距折叠</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布局"><span class="nav-number">3.</span> <span class="nav-text">布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面布局"><span class="nav-number">3.1.</span> <span class="nav-text">页面布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容布局"><span class="nav-number">3.2.</span> <span class="nav-text">内容布局</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定位"><span class="nav-number">4.</span> <span class="nav-text">定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相对定位"><span class="nav-number">4.1.</span> <span class="nav-text">相对定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对定位"><span class="nav-number">4.2.</span> <span class="nav-text">绝对定位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动"><span class="nav-number">5.</span> <span class="nav-text">浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排版"><span class="nav-number">6.</span> <span class="nav-text">排版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特效"><span class="nav-number">7.</span> <span class="nav-text">特效</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变换"><span class="nav-number">7.1.</span> <span class="nav-text">变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过渡"><span class="nav-number">7.2.</span> <span class="nav-text">过渡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动画"><span class="nav-number">7.3.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滤镜"><span class="nav-number">7.4.</span> <span class="nav-text">滤镜</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘振源</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log(`Failed to save Visitor num, with error message: ${responseJSON.error}`);
+              })
+          } else {
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
+    }
+  }
+
+  $(function() {
+    $.get('https://app-router.leancloud.cn/2/route?appId=' + 'K5KxjxPAToj88H7LO59ykbig-gzGzoHsz')
+      .done(function({ api_server }) {
+        var Counter = function(method, url, data) {
+          return $.ajax({
+            method: method,
+            url: `https://${api_server}/1.1${url}`,
+            headers: {
+              'X-LC-Id': 'K5KxjxPAToj88H7LO59ykbig-gzGzoHsz',
+              'X-LC-Key': 'ibMOmCEzBXpk5U604Eix9laC',
+              'Content-Type': 'application/json',
+            },
+            data: data
+          });
+        };
+        if (CONFIG.page.isPost) {
+          const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+          if (localhost.test(document.URL)) return;
+          addCount(Counter);
+        } else {
+          if ($('.post-title-link').length >= 1) {
+            showTime(Counter);
+          }
+        }
+      });
+  });
+  </script>
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+    
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'K5KxjxPAToj88H7LO59ykbig-gzGzoHsz',
+    appKey: 'ibMOmCEzBXpk5U604Eix9laC',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
