@@ -95,7 +95,7 @@
       
         <tags>
             
-            <tag> Resume </tag>
+            <tag> 简历 </tag>
             
         </tags>
       
@@ -380,8 +380,8 @@
     
     <entry>
       <title>超赞文章合集</title>
-      <link href="/posts/5017.html"/>
-      <url>/posts/5017.html</url>
+      <link href="/posts/498e7d63.html"/>
+      <url>/posts/498e7d63.html</url>
       
         <content type="html"><![CDATA[<p>好文章！</p><a id="more"></a><h2 id="文章列表"><a href="#文章列表" class="headerlink" title="文章列表"></a>文章列表</h2><h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><ul><li style="list-style: none"><input type="checkbox" checked> <a href="https://practicingruby.com/articles/event-loops-demystified" target="_blank" rel="noopener">Event loops demystified</a></li><li style="list-style: none"><input type="checkbox" checked> <a href="https://zhuanlan.zhihu.com/p/38395184" target="_blank" rel="noopener">NodeJS事件循环 Part 1</a></li><li style="list-style: none"><input type="checkbox" checked> <a href="https://eklitzke.org/how-tcp-sockets-work" target="_blank" rel="noopener">How TCP Sockets Work</a></li><li style="list-style: none"><input type="checkbox" checked> <a href="http://www.linusakesson.net/programming/tty/" target="_blank" rel="noopener">The TTY demystified</a></li><li style="list-style: none"><input type="checkbox"> <a href="https://io-meter.com/2018/02/09/A-summary-of-designing-schedulers/" target="_blank" rel="noopener">集群资源调度系统设计架构总结</a></li></ul>]]></content>
       
